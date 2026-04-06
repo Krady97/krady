@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Soulwake.Game.Stats;
 
@@ -16,6 +17,7 @@ namespace Soulwake.Game.Combat
         private PlayerStats stats;
 
         public bool IsDead { get; private set; }
+        public event Action<Damageable2D> OnDied;
 
         private void Awake()
         {
@@ -45,6 +47,7 @@ namespace Soulwake.Game.Combat
         private void HandleDied()
         {
             IsDead = true;
+            OnDied?.Invoke(this);
             if (destroyOnDeath)
             {
                 Destroy(gameObject);
