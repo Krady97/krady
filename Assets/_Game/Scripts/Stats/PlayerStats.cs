@@ -17,6 +17,7 @@ namespace Soulwake.Game.Stats
         public int AttackDamage => attackDamage;
 
         public event Action<int, int> OnHealthChanged;
+        public event Action<int, int> OnCoreStatsChanged;
         public event Action OnDied;
 
         public int CurrentHP { get; private set; }
@@ -26,6 +27,7 @@ namespace Soulwake.Game.Stats
         {
             CurrentHP = maxHP;
             RaiseHealthChanged();
+            RaiseCoreStatsChanged();
         }
 
         public void ResetHealthToFull()
@@ -61,9 +63,49 @@ namespace Soulwake.Game.Stats
             RaiseHealthChanged();
         }
 
+        public void AddPermanentMaxHP(int amount, bool healForAddedAmount = true)
+        {
+            int delta = Mathf.Max(0, amount);
+            if (delta <= 0)
+            {
+                return;
+            }
+
+            maxHP += delta;
+            if (healForAddedAmount && !IsDead)
+            {
+                CurrentHP = Mathf.Min(maxHP, CurrentHP + delta);
+                RaiseHealthChanged();
+            }
+            else
+            {
+                CurrentHP = Mathf.Min(CurrentHP, maxHP);
+                RaiseHealthChanged();
+            }
+
+            RaiseCoreStatsChanged();
+        }
+
+        public void AddPermanentAttackDamage(int amount)
+        {
+            int delta = Mathf.Max(0, amount);
+            if (delta <= 0)
+            {
+                return;
+            }
+
+            attackDamage += delta;
+            RaiseCoreStatsChanged();
+        }
+
         private void RaiseHealthChanged()
         {
             OnHealthChanged?.Invoke(CurrentHP, maxHP);
+        }
+
+        private void RaiseCoreStatsChanged()
+        {
+            OnCoreStatsChanged?.Invoke(maxHP, attackDamage);
         }
     }
 }
