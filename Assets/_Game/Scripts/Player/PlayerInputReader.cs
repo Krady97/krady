@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Krady.Game.Player
+namespace Soulwake.Game.Player
 {
     /// <summary>
     /// Centralized keyboard input for the player.

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Krady.Game.Player
+namespace Soulwake.Game.Player
 {
     /// <summary>
     /// Handles quarter-view 2D player movement using Rigidbody2D.
