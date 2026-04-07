@@ -252,3 +252,19 @@ Workflow:
 Notes:
 - The tool multiplies current profile values by the source multipliers (it compounds if run repeatedly).
 - Use duplicated profile assets before applying if you want easy rollback.
+
+## 14) Auto-generate default tuning assets (editor tool)
+
+If you want a quick starting set of tuning assets, use:
+
+- Menu: `Soulwake > Tools > Generate Default Vertical Slice Assets`
+
+This creates (if missing):
+- `Assets/_Game/ScriptableObjects/Tuning/Player_VSlice.asset`
+- `Assets/_Game/ScriptableObjects/Tuning/Enemy_Normal.asset`
+- `Assets/_Game/ScriptableObjects/Tuning/Enemy_Unique.asset`
+- `Assets/_Game/ScriptableObjects/Tuning/Enemy_Wraith.asset`
+
+Behavior:
+- Existing files are preserved (not overwritten).
+- The command shows a summary dialog with counts for created vs skipped assets.
