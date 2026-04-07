@@ -230,3 +230,25 @@ Preset persistence:
 - Multipliers are saved to JSON at:
   - `Application.persistentDataPath/soulwake_balance_debug_preset.json`
 - Optional auto-load/auto-save toggles are available on `BalanceDebugOverlayUI`.
+
+## 13) Promote debug preset into tuning assets (editor tool)
+
+When you find good runtime multipliers during playtests, use this tool to apply them into tuning ScriptableObjects:
+
+- Menu: `Soulwake > Tools > Promote Balance Preset To Tuning`
+
+Workflow:
+1. Open the window.
+2. Load source multipliers:
+   - `Load Saved Preset JSON`, or
+   - `Read Runtime Multipliers` (best while in Play mode).
+3. Assign target profiles:
+   - Player profile
+   - Normal enemy profile
+   - Unique enemy profile
+   - Wraith enemy profile
+4. Click `Apply Multipliers To Selected Profiles`.
+
+Notes:
+- The tool multiplies current profile values by the source multipliers (it compounds if run repeatedly).
+- Use duplicated profile assets before applying if you want easy rollback.

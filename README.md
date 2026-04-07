@@ -10,6 +10,7 @@ This repository contains the current vertical-slice gameplay foundation for **So
 - JSON save/load for player progression
 - ScriptableObject tuning profiles + optional runtime balance debug overlay/presets
 - data-driven tuning profiles for quick balance iteration
+- editor window to promote debug presets into tuning assets
 
 ## Unity setup reference
 
@@ -19,4 +20,4 @@ Use the full scene wiring checklist here:
 
 For balancing workflow and tuning profile setup:
 
-- `Docs/VerticalSlice_WorldSetup.md` (section 11)
+- `Docs/VerticalSlice_WorldSetup.md` (sections 11-13)
