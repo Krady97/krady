@@ -194,3 +194,32 @@ Assign profiles:
 - Enemy_Wraith prefab -> `EnemyTuningBinder.tuningProfile = Enemy_Wraith`
 
 Then tune gameplay feel by editing only these assets.
+
+## 12) Runtime balance debug overlay (optional)
+
+For quick in-play feel checks, add:
+- `BalanceDebugOverlayUI`
+- a TMP text object dedicated to debug output
+
+Setup:
+1. Create UI text `BalanceDebugText` (top-left or top-right).
+2. Add empty object `BalanceDebugTools`.
+3. Add component `BalanceDebugOverlayUI`.
+4. Assign `panelText = BalanceDebugText`.
+5. (Optional) assign player stats explicitly, otherwise it auto-finds by `Player` tag.
+
+Default controls:
+- `F2` toggle panel
+- `F3` reset all multipliers to 1.00
+- `,` previous field
+- `.` next field
+- `-` decrease selected multiplier
+- `=` increase selected multiplier
+
+Fields:
+- Player HP multiplier
+- Enemy HP multiplier
+- Player damage multiplier
+- Enemy damage multiplier
+- Player speed multiplier
+- Enemy speed multiplier

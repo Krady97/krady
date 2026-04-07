@@ -1,4 +1,5 @@
 using UnityEngine;
+using Soulwake.Game.DebugTools;
 
 namespace Soulwake.Game.Player
 {
@@ -49,7 +50,8 @@ namespace Soulwake.Game.Player
 
         private void FixedUpdate()
         {
-            rb.velocity = moveInput * moveSpeed;
+            float finalSpeed = moveSpeed * BalanceDebugRuntime.PlayerMoveSpeedMultiplier;
+            rb.velocity = moveInput * finalSpeed;
         }
     }
 }

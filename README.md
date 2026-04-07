@@ -8,6 +8,7 @@ This repository contains the current vertical-slice gameplay foundation for **So
 - soul realm trial + wraith rematch + skill reward
 - simple loot drops (gold/items) + HUD text feedback
 - JSON save/load for player progression
+- ScriptableObject tuning profiles + optional runtime balance debug overlay
 - data-driven tuning profiles for quick balance iteration
 
 ## Unity setup reference

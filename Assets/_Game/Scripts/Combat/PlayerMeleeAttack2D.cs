@@ -1,6 +1,7 @@
 using UnityEngine;
 using Soulwake.Game.Player;
 using Soulwake.Game.Stats;
+using Soulwake.Game.DebugTools;
 
 namespace Soulwake.Game.Combat
 {
@@ -104,10 +105,14 @@ namespace Soulwake.Game.Combat
         {
             if (usePlayerStatDamage)
             {
-                return Mathf.Max(1, playerStats.AttackDamage + Mathf.Max(0, bonusAttackDamage));
+                int baseValue = playerStats.AttackDamage + Mathf.Max(0, bonusAttackDamage);
+                float scaled = baseValue * BalanceDebugRuntime.PlayerDamageMultiplier;
+                return Mathf.Max(1, Mathf.RoundToInt(scaled));
             }
 
-            return Mathf.Max(1, baseAttackDamage + Mathf.Max(0, bonusAttackDamage));
+            int fallbackBaseValue = baseAttackDamage + Mathf.Max(0, bonusAttackDamage);
+            float fallbackScaled = fallbackBaseValue * BalanceDebugRuntime.PlayerDamageMultiplier;
+            return Mathf.Max(1, Mathf.RoundToInt(fallbackScaled));
         }
 
         public void ConfigureAttack(

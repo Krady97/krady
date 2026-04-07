@@ -1,4 +1,5 @@
 using UnityEngine;
+using Soulwake.Game.DebugTools;
 
 namespace Soulwake.Game.Enemy
 {
@@ -67,7 +68,10 @@ namespace Soulwake.Game.Enemy
                     continue;
                 }
 
-                damageable.ApplyDamage(attackDamage);
+                int finalDamage = Mathf.Max(
+                    1,
+                    Mathf.RoundToInt(attackDamage * BalanceDebugRuntime.EnemyDamageMultiplier));
+                damageable.ApplyDamage(finalDamage);
                 applied++;
             }
 

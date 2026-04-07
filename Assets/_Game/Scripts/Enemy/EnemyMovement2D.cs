@@ -1,5 +1,6 @@
 using UnityEngine;
 using Soulwake.Game.Combat;
+using Soulwake.Game.DebugTools;
 
 namespace Soulwake.Game.Enemy
 {
@@ -42,7 +43,8 @@ namespace Soulwake.Game.Enemy
             }
 
             Vector2 direction = delta.normalized;
-            rb.velocity = direction * moveSpeed;
+            float finalSpeed = moveSpeed * BalanceDebugRuntime.EnemyMoveSpeedMultiplier;
+            rb.velocity = direction * finalSpeed;
             LastMoveDirection = direction;
         }
 
