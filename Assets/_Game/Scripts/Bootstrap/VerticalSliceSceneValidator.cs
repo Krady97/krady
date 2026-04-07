@@ -7,6 +7,7 @@ using Soulwake.Game.Souls;
 using Soulwake.Game.SoulRealm;
 using Soulwake.Game.Loot;
 using Soulwake.Game.UI;
+using Soulwake.Game.Core;
 
 namespace Soulwake.Game.Bootstrap
 {
@@ -79,9 +80,9 @@ namespace Soulwake.Game.Bootstrap
 
         private static void ValidatePlayer(GameObject player, StringBuilder sb)
         {
-            if (!player.CompareTag("Player"))
+            if (!player.CompareTag(VerticalSliceConventions.PlayerTag))
             {
-                sb.AppendLine("- Player object should be tagged as 'Player'.");
+                sb.AppendLine($"- Player object should be tagged as '{VerticalSliceConventions.PlayerTag}'.");
             }
 
             if (player.GetComponent<PlayerStats>() == null)

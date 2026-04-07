@@ -17,7 +17,7 @@ namespace Soulwake.Game.SaveLoad
         [SerializeField] private PlayerGoldWallet playerGoldWallet;
         [SerializeField] private PlayerInventory playerInventory;
         [SerializeField] private PlayerSkillBook playerSkillBook;
-        [SerializeField] private string playerTag = "Player";
+        [SerializeField] private string playerTag = VerticalSliceConventions.PlayerTag;
 
         [Header("Hotkeys")]
         [SerializeField] private KeyCode saveKey = KeyCode.F5;

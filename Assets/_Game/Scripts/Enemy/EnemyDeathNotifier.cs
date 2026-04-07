@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Soulwake.Game.Combat;
+using Soulwake.Game.Core;
 
 namespace Soulwake.Game.Enemy
 {
@@ -12,13 +13,15 @@ namespace Soulwake.Game.Enemy
     public class EnemyDeathNotifier : MonoBehaviour
     {
         [Header("Identity")]
-        [SerializeField] private string enemyId = "enemy_default";
+        [SerializeField] private string enemyId = VerticalSliceConventions.DefaultNormalEnemyId;
         [SerializeField] private bool isUniqueEnemy;
 
         private Damageable2D damageable;
 
         public static event Action<EnemyDeathInfo> AnyEnemyDied;
         public event Action<EnemyDeathInfo> EnemyDied;
+        public string EnemyId => enemyId;
+        public bool IsUniqueEnemy => isUniqueEnemy;
 
         private void Awake()
         {
@@ -44,6 +47,16 @@ namespace Soulwake.Game.Enemy
 
             EnemyDied?.Invoke(info);
             AnyEnemyDied?.Invoke(info);
+        }
+
+        public void ConfigureIdentity(string newEnemyId, bool unique)
+        {
+            if (!string.IsNullOrWhiteSpace(newEnemyId))
+            {
+                enemyId = newEnemyId;
+            }
+
+            isUniqueEnemy = unique;
         }
     }
 }

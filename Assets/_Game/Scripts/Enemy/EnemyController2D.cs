@@ -1,5 +1,6 @@
 using UnityEngine;
 using Soulwake.Game.Combat;
+using Soulwake.Game.Core;
 
 namespace Soulwake.Game.Enemy
 {
@@ -17,7 +18,7 @@ namespace Soulwake.Game.Enemy
         [Header("Target")]
         [SerializeField] private Transform target;
         [SerializeField] private bool autoFindTargetByTag = true;
-        [SerializeField] private string playerTag = "Player";
+        [SerializeField] private string playerTag = VerticalSliceConventions.PlayerTag;
 
         [Header("Detection")]
         [SerializeField] private float aggroRange = 6f;

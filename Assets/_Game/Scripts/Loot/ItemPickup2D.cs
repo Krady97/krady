@@ -35,7 +35,7 @@ namespace Soulwake.Game.Loot
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (consumed || !other.CompareTag("Player"))
+            if (consumed || !other.CompareTag(VerticalSliceConventions.PlayerTag))
             {
                 return;
             }

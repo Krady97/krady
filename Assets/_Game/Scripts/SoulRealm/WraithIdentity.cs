@@ -1,4 +1,5 @@
 using UnityEngine;
+using Soulwake.Game.Core;
 
 namespace Soulwake.Game.SoulRealm
 {
@@ -7,7 +8,7 @@ namespace Soulwake.Game.SoulRealm
     /// </summary>
     public class WraithIdentity : MonoBehaviour
     {
-        [SerializeField] private string sourceEnemyId = "unique_enemy_01";
+        [SerializeField] private string sourceEnemyId = VerticalSliceConventions.EnemyIds.UniqueEnemyDefault;
 
         public string SourceEnemyId => sourceEnemyId;
 

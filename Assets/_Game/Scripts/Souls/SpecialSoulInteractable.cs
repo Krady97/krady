@@ -14,7 +14,7 @@ namespace Soulwake.Game.Souls
         [SerializeField] private string promptText = "Press F to enter Soul Realm";
 
         [Header("Payload")]
-        [SerializeField] private string sourceEnemyId = "unique_enemy_01";
+        [SerializeField] private string sourceEnemyId = VerticalSliceConventions.EnemyIds.UniqueEnemyDefault;
         [SerializeField] private bool consumeOnInteract = true;
 
         public static event Action<SpecialSoulInteractable> AnySpecialSoulInteracted;

@@ -33,7 +33,7 @@ namespace Soulwake.Game.Souls
             }
 
             PlayerStats playerStats = other.GetComponentInParent<PlayerStats>();
-            if (playerStats == null || !other.CompareTag("Player"))
+            if (playerStats == null || !other.CompareTag(VerticalSliceConventions.PlayerTag))
             {
                 return;
             }

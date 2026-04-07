@@ -19,7 +19,7 @@ namespace Soulwake.Game.SoulRealm
         [Serializable]
         private class RewardByEnemyId
         {
-            [SerializeField] private string sourceEnemyId = "unique_enemy_01";
+            [SerializeField] private string sourceEnemyId = VerticalSliceConventions.DefaultUniqueEnemyId;
             [SerializeField] private SkillRewardData skillReward = new SkillRewardData();
 
             public string SourceEnemyId => sourceEnemyId;
@@ -29,7 +29,7 @@ namespace Soulwake.Game.SoulRealm
         [Header("References")]
         [SerializeField] private Transform playerTransform;
         [SerializeField] private PlayerSkillBook playerSkillBook;
-        [SerializeField] private string playerTag = "Player";
+        [SerializeField] private string playerTag = VerticalSliceConventions.PlayerTag;
 
         [Header("Realm Points")]
         [SerializeField] private Transform soulRealmPlayerSpawnPoint;

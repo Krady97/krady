@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Soulwake.Game.Core;
 using Soulwake.Game.Enemy;
 
 namespace Soulwake.Game.Loot
@@ -15,7 +16,7 @@ namespace Soulwake.Game.Loot
         private class LootEntry
         {
             [Header("Match")]
-            [SerializeField] private string enemyId = "enemy_default";
+            [SerializeField] private string enemyId = VerticalSliceConventions.EnemyIds.NormalEnemyDefault;
             [SerializeField] private bool appliesToUniqueEnemies = true;
             [SerializeField] private bool appliesToNormalEnemies = true;
 
