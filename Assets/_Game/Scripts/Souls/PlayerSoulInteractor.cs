@@ -91,12 +91,12 @@ namespace Soulwake.Game.Souls
             {
                 if (string.IsNullOrEmpty(prompt))
                 {
-                    GameplayTextEvents.Publish(string.Empty);
+                    GameplayTextEvents.Raise(string.Empty);
                     Debug.Log("Soulwake: Special soul prompt hidden.");
                 }
                 else
                 {
-                    GameplayTextEvents.Publish(prompt);
+                    GameplayTextEvents.Raise(prompt);
                     Debug.Log($"Soulwake: {prompt}");
                 }
                 lastPromptText = prompt;

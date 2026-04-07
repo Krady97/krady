@@ -48,7 +48,7 @@ namespace Soulwake.Game.Souls
                 playerStats.AddPermanentAttackDamage(bonusAttackDamage);
             }
 
-            GameplayTextEvents.Publish($"Soul absorbed! +{bonusMaxHP} Max HP, +{bonusAttackDamage} ATK");
+            GameplayTextEvents.Raise($"Soul absorbed! +{bonusMaxHP} Max HP, +{bonusAttackDamage} ATK");
             consumed = true;
             Destroy(gameObject);
         }
