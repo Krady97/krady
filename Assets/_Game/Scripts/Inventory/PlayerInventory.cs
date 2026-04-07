@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Soulwake.Game.Inventory
@@ -26,6 +27,17 @@ namespace Soulwake.Game.Inventory
             itemIds.Add(itemId);
             OnItemAdded?.Invoke(itemId, displayName);
             return true;
+        }
+
+        public void ReplaceItems(IEnumerable<string> newItemIds)
+        {
+            itemIds.Clear();
+            if (newItemIds == null)
+            {
+                return;
+            }
+
+            itemIds.AddRange(newItemIds.Where(id => !string.IsNullOrWhiteSpace(id)));
         }
     }
 }

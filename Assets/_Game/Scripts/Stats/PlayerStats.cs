@@ -98,6 +98,19 @@ namespace Soulwake.Game.Stats
             RaiseCoreStatsChanged();
         }
 
+        /// <summary>
+        /// Applies full stat state from save data.
+        /// </summary>
+        public void ApplyLoadedState(int loadedMaxHp, int loadedAttackDamage, int loadedCurrentHp)
+        {
+            maxHP = Mathf.Max(1, loadedMaxHp);
+            attackDamage = Mathf.Max(0, loadedAttackDamage);
+            CurrentHP = Mathf.Clamp(loadedCurrentHp, 0, maxHP);
+
+            RaiseCoreStatsChanged();
+            RaiseHealthChanged();
+        }
+
         private void RaiseHealthChanged()
         {
             OnHealthChanged?.Invoke(CurrentHP, maxHP);

@@ -18,7 +18,9 @@ namespace Soulwake.Game.Combat
 
         [Header("Attack")]
         [SerializeField] private float attackRange = 1.0f;
-        [SerializeField] private int attackDamage = 10;
+        [SerializeField] private bool usePlayerStatDamage = true;
+        [SerializeField] private int baseAttackDamage = 3;
+        [SerializeField] private int bonusAttackDamage;
         [SerializeField] private float attackCooldown = 0.35f;
         [SerializeField] private LayerMask targetLayers;
         [SerializeField] private int maxTargetsPerSwing = 8;
@@ -27,7 +29,7 @@ namespace Soulwake.Game.Combat
         private float nextAttackTime;
 
         public float AttackRange => attackRange;
-        public int AttackDamage => attackDamage;
+        public int AttackDamage => ResolveAttackDamage();
         public float AttackCooldown => attackCooldown;
 
         private void Reset()
@@ -92,10 +94,20 @@ namespace Soulwake.Game.Combat
                     continue;
                 }
 
-                int finalDamage = attackDamage > 0 ? attackDamage : playerStats.AttackDamage;
+                int finalDamage = ResolveAttackDamage();
                 damageable.ApplyDamage(finalDamage);
                 processed++;
             }
+        }
+
+        private int ResolveAttackDamage()
+        {
+            if (usePlayerStatDamage)
+            {
+                return Mathf.Max(1, playerStats.AttackDamage + Mathf.Max(0, bonusAttackDamage));
+            }
+
+            return Mathf.Max(1, baseAttackDamage + Mathf.Max(0, bonusAttackDamage));
         }
 
         private void OnDrawGizmosSelected()

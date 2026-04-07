@@ -33,6 +33,12 @@ namespace Soulwake.Game.Inventory
             RaiseChanged(delta);
         }
 
+        public void SetGoldDirect(int value)
+        {
+            CurrentGold = Mathf.Max(0, value);
+            RaiseChanged(0);
+        }
+
         private void RaiseChanged(int delta)
         {
             OnGoldChanged?.Invoke(delta, CurrentGold);

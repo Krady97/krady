@@ -38,5 +38,24 @@ namespace Soulwake.Game.Skills
             GameplayTextEvents.Raise($"Learned {reward.Type} skill: {reward.DisplayName}");
             return true;
         }
+
+        public void ReplaceLearnedSkills(IEnumerable<string> skillIds)
+        {
+            learnedSkillIds.Clear();
+            if (skillIds == null)
+            {
+                return;
+            }
+
+            foreach (string skillId in skillIds)
+            {
+                if (string.IsNullOrWhiteSpace(skillId) || learnedSkillIds.Contains(skillId))
+                {
+                    continue;
+                }
+
+                learnedSkillIds.Add(skillId);
+            }
+        }
     }
 }

@@ -16,7 +16,8 @@ namespace Soulwake.Game.Souls
         [SerializeField] private LayerMask specialSoulLayer;
         [SerializeField] private int maxDetectionHits = 8;
 
-        [Header("Debug")]
+        [Header("UI/Debug")]
+        [SerializeField] private bool publishPromptToTextFeed = true;
         [SerializeField] private bool logPromptChanges;
 
         private readonly Collider2D[] overlapBuffer = new Collider2D[16];
@@ -87,17 +88,23 @@ namespace Soulwake.Game.Souls
 
             currentInteractable = best;
             string prompt = currentInteractable != null ? currentInteractable.PromptText : string.Empty;
-            if (logPromptChanges && prompt != lastPromptText)
+            if (prompt != lastPromptText)
             {
-                if (string.IsNullOrEmpty(prompt))
-                {
-                    GameplayTextEvents.Raise(string.Empty);
-                    Debug.Log("Soulwake: Special soul prompt hidden.");
-                }
-                else
+                if (publishPromptToTextFeed)
                 {
                     GameplayTextEvents.Raise(prompt);
-                    Debug.Log($"Soulwake: {prompt}");
+                }
+
+                if (logPromptChanges)
+                {
+                    if (string.IsNullOrEmpty(prompt))
+                    {
+                        Debug.Log("Soulwake: Special soul prompt hidden.");
+                    }
+                    else
+                    {
+                        Debug.Log($"Soulwake: {prompt}");
+                    }
                 }
                 lastPromptText = prompt;
             }
