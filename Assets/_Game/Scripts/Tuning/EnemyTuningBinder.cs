@@ -52,7 +52,13 @@ namespace Soulwake.Game.Tuning
                 tuningProfile.AttackDamage,
                 tuningProfile.AttackCooldown);
             meleeAttack?.SetMaxTargetsPerSwing(tuningProfile.MaxTargetsPerSwing);
-            controller?.ApplyTuning(tuningProfile);
+            if (controller != null)
+            {
+                controller.SetDetectionTuning(
+                    tuningProfile.AggroRange,
+                    tuningProfile.LoseInterestRange,
+                    tuningProfile.AttackDistancePadding);
+            }
             EnemyDeathNotifier deathNotifier = GetComponent<EnemyDeathNotifier>();
             if (deathNotifier != null)
             {
