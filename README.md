@@ -8,9 +8,14 @@ This repository contains the current vertical-slice gameplay foundation for **So
 - soul realm trial + wraith rematch + skill reward
 - simple loot drops (gold/items) + HUD text feedback
 - JSON save/load for player progression
+- data-driven tuning profiles for quick balance iteration
 
 ## Unity setup reference
 
 Use the full scene wiring checklist here:
 
 - `Docs/VerticalSlice_WorldSetup.md`
+
+For balancing workflow and tuning profile setup:
+
+- `Docs/VerticalSlice_WorldSetup.md` (section 11)

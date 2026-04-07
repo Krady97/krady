@@ -111,6 +111,24 @@ namespace Soulwake.Game.Stats
             RaiseHealthChanged();
         }
 
+        public void ConfigureBaseStats(int newMaxHp, int newAttackDamage, bool refillHealth)
+        {
+            maxHP = Mathf.Max(1, newMaxHp);
+            attackDamage = Mathf.Max(0, newAttackDamage);
+
+            if (refillHealth)
+            {
+                CurrentHP = maxHP;
+            }
+            else
+            {
+                CurrentHP = Mathf.Clamp(CurrentHP, 0, maxHP);
+            }
+
+            RaiseCoreStatsChanged();
+            RaiseHealthChanged();
+        }
+
         private void RaiseHealthChanged()
         {
             OnHealthChanged?.Invoke(CurrentHP, maxHP);

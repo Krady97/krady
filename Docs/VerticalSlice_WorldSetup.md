@@ -33,10 +33,12 @@ Add components:
 - `PlayerGoldWallet`
 - `PlayerInventory`
 - `PlayerProgressSaveController`
+- `PlayerTuningBinder` (optional but recommended)
 
 Important inspector setup:
 - `PlayerMeleeAttack2D.targetLayers` includes `Enemy`
 - `PlayerSoulInteractor.specialSoulLayer` includes `SpecialSoul`
+- if using `PlayerTuningBinder`, assign a `PlayerTuningProfile` asset
 - `PlayerProgressSaveController`
   - save key: `F5`
   - load key: `F9`
@@ -56,6 +58,7 @@ Add components:
 - `EnemyController2D`
 - `EnemyDeathNotifier`
 - `EnemyTagAuthoring` (optional helper)
+- `EnemyTuningBinder` (optional but recommended)
 
 Setup:
 - Layer = `Enemy`
@@ -63,6 +66,7 @@ Setup:
 - `EnemyDeathNotifier`
   - `enemyId = enemy_normal_01`
   - `isUniqueEnemy = false`
+- if using `EnemyTuningBinder`, assign an `EnemyTuningProfile`
 
 ## 4) Unique enemy prefab
 
@@ -73,6 +77,7 @@ Differences:
 - `EnemyDeathNotifier`
   - `enemyId = enemy_unique_01`
   - `isUniqueEnemy = true`
+- use a separate `EnemyTuningProfile` for unique values
 
 ## 5) Wraith enemy prefab
 
@@ -82,6 +87,7 @@ Recommended:
 - increase HP and attack further for trial feel
 - keep enemy combat scripts
 - add `WraithIdentity` (optional; manager can add runtime)
+- use a separate `EnemyTuningProfile` for wraith trial values
 
 ## 6) Soul prefabs
 
@@ -168,3 +174,23 @@ Add components:
 6. Kill wraith -> skill learned + return to world.
 7. Collect loot pickups -> gold/inventory updates.
 8. Press `F5` to save, `F9` to load and verify persistence.
+
+## 11) Tuning profiles (new)
+
+Create assets:
+- `Create > Soulwake > Tuning > Player Tuning Profile`
+- `Create > Soulwake > Tuning > Enemy Tuning Profile`
+
+Suggested profile set:
+- `Player_VSlice.asset`
+- `Enemy_Normal.asset`
+- `Enemy_Unique.asset`
+- `Enemy_Wraith.asset`
+
+Assign profiles:
+- Player -> `PlayerTuningBinder.profile = Player_VSlice`
+- Enemy_Normal prefab -> `EnemyTuningBinder.tuningProfile = Enemy_Normal`
+- Enemy_Unique prefab -> `EnemyTuningBinder.tuningProfile = Enemy_Unique`
+- Enemy_Wraith prefab -> `EnemyTuningBinder.tuningProfile = Enemy_Wraith`
+
+Then tune gameplay feel by editing only these assets.

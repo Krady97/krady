@@ -74,6 +74,18 @@ namespace Soulwake.Game.Enemy
             return true;
         }
 
+        public void SetAttackTuning(float newAttackRange, int newAttackDamage, float newAttackCooldown)
+        {
+            attackRange = Mathf.Max(0.05f, newAttackRange);
+            attackDamage = Mathf.Max(1, newAttackDamage);
+            attackCooldown = Mathf.Max(0.01f, newAttackCooldown);
+        }
+
+        public void SetMaxTargetsPerSwing(int newMaxTargetsPerSwing)
+        {
+            maxTargetsPerSwing = Mathf.Max(1, newMaxTargetsPerSwing);
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0.95f, 0.55f, 0.1f, 0.75f);

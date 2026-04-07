@@ -20,6 +20,17 @@ namespace Soulwake.Game.Player
         public Vector2 CurrentMoveInput => moveInput;
         public Vector2 FacingDirection { get; private set; } = Vector2.down;
 
+        public float MoveSpeed
+        {
+            get => moveSpeed;
+            set => moveSpeed = Mathf.Max(0.1f, value);
+        }
+
+        public void SetMoveSpeed(float speed)
+        {
+            MoveSpeed = speed;
+        }
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();

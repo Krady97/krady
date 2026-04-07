@@ -110,6 +110,20 @@ namespace Soulwake.Game.Combat
             return Mathf.Max(1, baseAttackDamage + Mathf.Max(0, bonusAttackDamage));
         }
 
+        public void ConfigureAttack(
+            float newAttackRange,
+            bool shouldUsePlayerStatDamage,
+            int newBaseAttackDamage,
+            int newBonusAttackDamage,
+            float newAttackCooldown)
+        {
+            attackRange = Mathf.Max(0.1f, newAttackRange);
+            usePlayerStatDamage = shouldUsePlayerStatDamage;
+            baseAttackDamage = Mathf.Max(1, newBaseAttackDamage);
+            bonusAttackDamage = Mathf.Max(0, newBonusAttackDamage);
+            attackCooldown = Mathf.Max(0.01f, newAttackCooldown);
+        }
+
         private void OnDrawGizmosSelected()
         {
             Vector2 facing = Vector2.down;

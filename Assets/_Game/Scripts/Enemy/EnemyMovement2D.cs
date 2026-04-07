@@ -50,5 +50,10 @@ namespace Soulwake.Game.Enemy
         {
             rb.velocity = Vector2.zero;
         }
+
+        public void SetMoveSpeed(float speed)
+        {
+            moveSpeed = Mathf.Max(0.1f, speed);
+        }
     }
 }

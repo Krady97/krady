@@ -101,5 +101,12 @@ namespace Soulwake.Game.Enemy
                 target = playerObject.transform;
             }
         }
+
+        public void SetDetectionTuning(float newAggroRange, float newLoseInterestRange, float newAttackDistancePadding)
+        {
+            aggroRange = Mathf.Max(0.1f, newAggroRange);
+            loseInterestRange = Mathf.Max(aggroRange, newLoseInterestRange);
+            attackDistancePadding = Mathf.Max(0f, newAttackDistancePadding);
+        }
     }
 }
