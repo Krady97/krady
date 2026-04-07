@@ -211,6 +211,8 @@ Setup:
 Default controls:
 - `F2` toggle panel
 - `F3` reset all multipliers to 1.00
+- `F6` save current multipliers preset
+- `F7` load multipliers preset
 - `,` previous field
 - `.` next field
 - `-` decrease selected multiplier
@@ -223,3 +225,8 @@ Fields:
 - Enemy damage multiplier
 - Player speed multiplier
 - Enemy speed multiplier
+
+Preset persistence:
+- Multipliers are saved to JSON at:
+  - `Application.persistentDataPath/soulwake_balance_debug_preset.json`
+- Optional auto-load/auto-save toggles are available on `BalanceDebugOverlayUI`.

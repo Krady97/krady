@@ -29,6 +29,8 @@ namespace Soulwake.Game.DebugTools
         [Header("Input")]
         [SerializeField] private KeyCode toggleKey = KeyCode.F2;
         [SerializeField] private KeyCode resetKey = KeyCode.F3;
+        [SerializeField] private KeyCode savePresetKey = KeyCode.F6;
+        [SerializeField] private KeyCode loadPresetKey = KeyCode.F7;
         [SerializeField] private KeyCode previousFieldKey = KeyCode.Comma;
         [SerializeField] private KeyCode nextFieldKey = KeyCode.Period;
         [SerializeField] private KeyCode decreaseKey = KeyCode.Minus;
@@ -42,6 +44,8 @@ namespace Soulwake.Game.DebugTools
 
         [Header("Messages")]
         [SerializeField] private bool publishChangesToGameplayFeed;
+        [SerializeField] private bool autoLoadPresetOnStart = true;
+        [SerializeField] private bool autoSavePresetOnDisable = true;
 
         private readonly Dictionary<int, int> enemyBaseHpByInstanceId = new Dictionary<int, int>();
         private Field selectedField;
@@ -56,6 +60,10 @@ namespace Soulwake.Game.DebugTools
         private void OnDisable()
         {
             BalanceDebugRuntime.MultipliersChanged -= HandleMultipliersChanged;
+            if (autoSavePresetOnDisable)
+            {
+                SavePreset();
+            }
         }
 
         private void Start()
@@ -65,6 +73,11 @@ namespace Soulwake.Game.DebugTools
             if (playerStats != null && playerBaseHp < 0)
             {
                 playerBaseHp = playerStats.MaxHP;
+            }
+
+            if (autoLoadPresetOnStart)
+            {
+                LoadPreset();
             }
             RefreshText();
         }
@@ -81,6 +94,18 @@ namespace Soulwake.Game.DebugTools
             {
                 BalanceDebugRuntime.ResetAll();
                 Publish("Balance debug multipliers reset.");
+                return;
+            }
+
+            if (Input.GetKeyDown(savePresetKey))
+            {
+                SavePreset();
+                return;
+            }
+
+            if (Input.GetKeyDown(loadPresetKey))
+            {
+                LoadPreset();
                 return;
             }
 
@@ -227,7 +252,8 @@ namespace Soulwake.Game.DebugTools
                 $"{Marker(Field.PlayerMoveSpeed)} Player SPD x{BalanceDebugRuntime.PlayerMoveSpeedMultiplier:0.00}\n" +
                 $"{Marker(Field.EnemyMoveSpeed)} Enemy SPD x{BalanceDebugRuntime.EnemyMoveSpeedMultiplier:0.00}\n\n" +
                 $"[{previousFieldKey}] Prev  [{nextFieldKey}] Next\n" +
-                $"[{decreaseKey}] -  [{increaseKey}] +  [{resetKey}] Reset  [{toggleKey}] Toggle";
+                $"[{decreaseKey}] -  [{increaseKey}] +  [{resetKey}] Reset\n" +
+                $"[{savePresetKey}] Save  [{loadPresetKey}] Load  [{toggleKey}] Toggle";
         }
 
         private string Marker(Field field)
@@ -241,6 +267,31 @@ namespace Soulwake.Game.DebugTools
             {
                 GameplayTextEvents.Raise(message);
             }
+        }
+
+        [ContextMenu("Save Debug Preset")]
+        public void SavePreset()
+        {
+            if (BalanceDebugPresetStorage.TrySave(BalanceDebugRuntime.CreateSnapshot(), out string error))
+            {
+                Publish("Balance debug preset saved.");
+                return;
+            }
+
+            Publish($"Failed to save debug preset: {error}");
+        }
+
+        [ContextMenu("Load Debug Preset")]
+        public void LoadPreset()
+        {
+            if (!BalanceDebugPresetStorage.TryLoad(out BalanceDebugPresetData data, out string loadError))
+            {
+                Publish($"Debug preset not loaded: {loadError}");
+                return;
+            }
+
+            BalanceDebugRuntime.ApplySnapshot(data, true);
+            Publish("Balance debug preset loaded.");
         }
     }
 }

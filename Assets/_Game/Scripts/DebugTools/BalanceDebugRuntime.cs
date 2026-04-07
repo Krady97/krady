@@ -26,6 +26,42 @@ namespace Soulwake.Game.DebugTools
         public static float PlayerHpMultiplier => playerHpMultiplier;
         public static float EnemyHpMultiplier => enemyHpMultiplier;
 
+        public static BalanceDebugPresetData CreateSnapshot()
+        {
+            return new BalanceDebugPresetData(
+                playerHpMultiplier,
+                enemyHpMultiplier,
+                playerDamageMultiplier,
+                enemyDamageMultiplier,
+                playerMoveSpeedMultiplier,
+                enemyMoveSpeedMultiplier);
+        }
+
+        public static void ApplySnapshot(BalanceDebugPresetData preset, bool notify = true)
+        {
+            if (preset == null)
+            {
+                return;
+            }
+
+            bool changed = false;
+            changed |= SetInternal(ref playerHpMultiplier, preset.playerHpMultiplier);
+            changed |= SetInternal(ref enemyHpMultiplier, preset.enemyHpMultiplier);
+            changed |= SetInternal(ref playerDamageMultiplier, preset.playerDamageMultiplier);
+            changed |= SetInternal(ref enemyDamageMultiplier, preset.enemyDamageMultiplier);
+            changed |= SetInternal(ref playerMoveSpeedMultiplier, preset.playerMoveSpeedMultiplier);
+            changed |= SetInternal(ref enemyMoveSpeedMultiplier, preset.enemyMoveSpeedMultiplier);
+
+            if (changed && notify)
+            {
+                MultipliersChanged?.Invoke();
+            }
+        }
+
+        // Backward-compatible aliases.
+        public static BalanceDebugPresetData ToPreset() => CreateSnapshot();
+        public static void ApplyPreset(BalanceDebugPresetData preset) => ApplySnapshot(preset, true);
+
         public static void SetPlayerDamageMultiplier(float value) => Set(ref playerDamageMultiplier, value);
         public static void SetEnemyDamageMultiplier(float value) => Set(ref enemyDamageMultiplier, value);
         public static void SetPlayerMoveSpeedMultiplier(float value) => Set(ref playerMoveSpeedMultiplier, value);
